@@ -68,23 +68,6 @@ CREATE TABLE IF NOT EXISTS Campus(
     municipality VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS User(
-	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    username VARCHAR(100) UNIQUE,
-    names VARCHAR(255),
-    last_names VARCHAR(255),
-    email VARCHAR(255),
-    phone INT,
-    password VARCHAR(255),
-	creation_date TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    status_id INT,
-    role_id INT,
-    -- campus_id INT,
-    CONSTRAINT FK_USER_ROL_ID FOREIGN KEY (role_id) REFERENCES Role(id),
-    -- CONSTRAINT FK_USER_CAMPUS_ID FOREIGN KEY (campus_id) REFERENCES Campus(id),
-    CONSTRAINT FK_USER_STATUS_ID FOREIGN KEY (status_id) REFERENCES Status(id)
-);
-
 CREATE TABLE IF NOT EXISTS Case_Info(
 	id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     case_name VARCHAR(255),
@@ -134,6 +117,7 @@ CREATE TABLE IF NOT EXISTS Request(
     image VARCHAR(255),
     additional_description VARCHAR(250),
     created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    similarities INT DEFAULT 0,
     CONSTRAINT FK_REQUEST_CASE_ID FOREIGN KEY (case_id) REFERENCES CASE_INFO(id),
     CONSTRAINT FK_REQUEST_STATUS_ID FOREIGN KEY (status_id) REFERENCES Request_Status(id)
 );
@@ -158,7 +142,11 @@ CREATE TABLE IF NOT EXISTS Settings(
     complexion INT,
     image INT,
     sex INT,
-    maxRequests INT
+    max_requests INT,
+    email_domain VARCHAR(100),
+    confirmation_token_expiration_time INT,
+    enable_scheduler BOOL,
+    scheduler_time TIME
 );
 
 
