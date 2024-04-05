@@ -1,5 +1,5 @@
 USE inacif;
-INSERT INTO Request_Status(name) VALUES ('Ingresada'), ("Validada"), ('Pendiente'), ('Resuelta'), ('Confirmada'), ('Rechazada');
+INSERT INTO Request_Status(name) VALUES ('Ingresada'), ('Pendiente'), ('Resuelta'), ('Confirmada'), ('Rechazada');
 
 -- Ingresada: Se ingresa una nueva solicitud
 -- Validada: Se valida que llegó el correo
@@ -9,7 +9,7 @@ INSERT INTO Request_Status(name) VALUES ('Ingresada'), ("Validada"), ('Pendiente
 -- Rechazada: Se rechaza la solicitud
 
 INSERT INTO Settings(eyes, hair, skin, feet, height, image, sex, max_requests, complexion, email_domain, confirmation_token_expiration_time, enable_scheduler, scheduler_time) 
-VALUES(0,0,0,0,0,80,100,3,0, 'localhost:4201', 5, true, '00:00');
+VALUES(0,0,0,0,0,80,100,3,0, 'http://localhost:4201', 5, true, '00:00');
 
 INSERT INTO Status(name) VALUES('Activo'),('Inactivo'),('Bloqueado');
 
@@ -24,7 +24,7 @@ VALUES
 	
 -- Creación del sub menú
 INSERT INTO Menu(name, short, level, father_id, user_modifies, creation_date, modification_date, icon, key_route)
-SELECT 'Ingresar nuevo', 1, 2, m0.id, 'Administrador', NOW(), NULL, NULL, '/atencion/casos/nuevoMenuMenu' FROM Menu m0 WHERE m0.name = 'Casos'
+SELECT 'Ingresar nuevo', 1, 2, m0.id, 'Administrador', NOW(), NULL, NULL, '/atencion/casos/nuevo' FROM Menu m0 WHERE m0.name = 'Casos'
 UNION ALL
 SELECT 'Ver todas', 2, 2, m1.id, 'Administrador', NOW(), NULL, NULL, '/atencion/solicitudes/ver' FROM Menu m1 WHERE m1.name = 'Solicitudes'
 UNION ALL
